@@ -66,7 +66,7 @@ export function ChatsProvider({ children }) {
         // username only, no message preview — the content stays private,
         // not leaked into a toast. unread count folds in every message from
         // this same sender that piled up while we weren't looking
-        setNotification({ id: crypto.randomUUID(), username: message.senderUsername, unread })
+        setNotification({ id: crypto.randomUUID(), username: message.senderUsername, unread, chatId: message.chatId })
         setIncomingMessage(message)
 
         // a real delivery ack, sent the instant the message actually reaches

@@ -1,10 +1,13 @@
 import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useChats } from '../context/ChatsContext'
 
 const AUTO_DISMISS_MS = 4000
 
 function MessageToast() {
   const { notification, dismissNotification } = useChats()
+  const location = useLocation()
+  const chatOpen = notification && location.pathname === `/chat/${notification.chatId}`
 
   useEffect(() => {
     if (!notification) return
@@ -12,7 +15,7 @@ function MessageToast() {
     return () => clearTimeout(timer)
   }, [notification, dismissNotification])
 
-  if (!notification) return null
+  if (!notification || chatOpen) return null
 
   return (
     <div className="message-toast" role="status">
