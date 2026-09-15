@@ -1,184 +1,847 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
-
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-}
-
-.hero {
+/* --- app shell / bottom nav --- */
+.app-shell {
   position: relative;
-
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
-
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
-}
-
-#center {
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
-
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
+  height: 100%;
+  min-height: 0;
 }
 
-#next-steps {
+.app-header {
   display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
-
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
-
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
-}
-
-#next-steps ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
+  align-items: center;
   gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
 }
 
-#spacer {
-  height: 88px;
+.app-title {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* populated only on Home, via portal — see Layout.jsx / Home.jsx */
+.app-header-slot {
+  flex: 0 0 auto;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.header-users-toggle {
+  border: none;
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: center;
+  padding: 5px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* --- account menu (header, every page) --- */
+.account-menu {
+  position: relative;
+  flex: 0 0 auto;
+  margin-left: auto;
+}
+
+.account-toggle {
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
+.account-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 40;
+  min-width: 160px;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.account-dropdown-item {
+  padding: 10px 14px;
+  border: none;
+  background: none;
+  font: inherit;
+  text-align: left;
+  color: var(--text-h);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.account-dropdown-item + .account-dropdown-item {
   border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
+}
+
+.account-item-warning {
+  color: #b8860b;
+}
+
+.account-item-danger {
+  color: #e74c3c;
+}
+
+.app-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.bottom-nav {
+  display: flex;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.bottom-nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 0 8px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 11px;
+}
+
+.bottom-nav-item svg {
+  width: 22px;
+  height: 22px;
+}
+
+.bottom-nav-item.active {
+  color: var(--accent);
+}
+
+.bottom-nav-icon {
+  position: relative;
+}
+
+.nav-badge {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  background: #e74c3c;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+.message-toast {
+  position: absolute;
+  left: 50%;
+  top: 64px;
+  transform: translateX(-50%);
+  z-index: 30;
+  max-width: calc(100% - 32px);
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  box-shadow: var(--shadow);
+  font-size: 13px;
+  /* the (n) count is part of the same sentence as the rest of the text —
+     without this, a nowrap-less flex row can still wrap the span's own text
+     internally, dropping "(n)" onto its own line */
+  white-space: nowrap;
+}
+
+/* --- shared page layout --- */
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.page-header {
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.page-header-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chat-search {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 8px 14px;
+  font: inherit;
+  background: var(--code-bg);
+  color: var(--text-h);
+}
+
+.new-chat-btn {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.avatar {
+  position: relative;
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent-bg);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.avatar-sm {
+  width: 34px;
+  height: 34px;
+  font-size: 13px;
+}
+
+.avatar-lg {
+  width: 72px;
+  height: 72px;
+  font-size: 22px;
+}
+
+.avatar-placeholder {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.status-dot {
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+}
+
+.status-online {
+  background: #2ecc71;
+}
+
+.status-offline {
+  background: #e74c3c;
+}
+
+/* --- home feed --- */
+.home-page {
+  position: relative;
+}
+
+.home-scroll {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+}
+
+/* --- users sidebar (Home only, toggled from the header) ---
+   overlays on top of home-scroll without displacing it — no flex/width change
+   on the rest of the page when it opens or closes, nothing else re-mounts.
+   Sized to its content (at most 5 users) instead of the full page height. */
+.users-sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  width: 68px;
+  max-height: 60%;
+  padding: 12px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 0 0 14px 0;
+  box-shadow: var(--shadow);
+  overflow-y: auto;
+}
+
+.users-sidebar-item {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
+}
+
+.users-sidebar-name {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-h);
+  max-width: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.section-title {
+  margin: 0;
+  padding: 14px 16px 6px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-h);
+}
+
+/* same look as the h2 version, just interactive — only reset the button
+   chrome here, NOT font (a "font: inherit" shorthand would also wipe out
+   .section-title's font-weight/font-size, since this selector is more
+   specific and would win) */
+button.section-title-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  border: none;
+  background: none;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.accordion-chevron {
+  flex: 0 0 auto;
+  color: var(--text);
+  transition: transform 0.2s ease;
+}
+
+.accordion-chevron-open {
+  transform: rotate(90deg);
+}
+
+/* collapsed by default (0fr); "Chat frequenti" toggles .accordion-open,
+   same chat-shortcuts markup/graphics inside, just shown or not. The clip
+   lives on its own .accordion-panel-inner wrapper, not on .chat-shortcuts
+   itself, so it never fights with chat-shortcuts' own overflow-x:auto. */
+.accordion-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.25s ease;
+}
+
+.accordion-panel.accordion-open {
+  grid-template-rows: 1fr;
+}
+
+.accordion-panel-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.post-feed {
+  padding: 6px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.post-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.post-author {
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.post-text {
+  margin: 0 0 10px;
+  color: var(--text-h);
+  font-size: 14px;
+}
+
+.post-image {
+  display: block;
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.post-actions {
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+  color: var(--text);
+}
+
+/* --- chat shortcuts (round avatars, one per chat) --- */
+.chat-shortcuts {
+  display: flex;
+  gap: 18px;
+  padding: 16px;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--border);
+}
+
+.chat-shortcuts-empty {
+  margin: 0;
+  padding: 4px 16px 16px;
+  color: var(--text);
+  font-size: 13px;
+  border-bottom: 1px solid var(--border);
+}
+
+.chat-shortcut {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 72px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.chat-shortcut-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-h);
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shortcut-unread-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  border: 2px solid var(--bg);
+}
+
+/* --- chat list --- */
+.chat-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.chat-row {
+  display: flex;
+  gap: 12px;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid var(--border);
+}
+
+.chat-row-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.chat-row-top,
+.chat-row-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.chat-row-name {
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.chat-row-time {
+  font-size: 12px;
+  color: var(--text);
+  flex: 0 0 auto;
+}
+
+.chat-row-preview {
+  font-size: 14px;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.unread-badge {
+  flex: 0 0 auto;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+}
+
+/* --- chat thread --- */
+.thread-page {
+  height: 100%;
+}
+
+.thread-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.back-link {
+  color: var(--text-h);
+  text-decoration: none;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.thread-title {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.thread-name {
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.typing-indicator {
+  font-size: 12px;
+  font-style: italic;
+  color: var(--accent);
+}
+
+.thread-messages {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-anchor: none;
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--code-bg);
+}
+
+/* hugs the bottom when the loaded messages don't fill the thread's height,
+   like every real chat app — margin-top:auto on the first child only takes
+   up the LEFTOVER space; unlike justify-content:flex-end on the container,
+   it collapses to 0 once content actually overflows, so it never blocks
+   scrolling (flex-end pushes the overflow above scrollTop=0, which the
+   browser can't reach since scrollTop can't go negative) */
+.thread-messages > *:first-child {
+  margin-top: auto;
+}
+
+.thread-loading-hint {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text);
+  padding: 4px 0 8px;
+}
+
+.bubble {
+  max-width: 75%;
+  padding: 8px 10px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 14px;
+}
+
+.bubble-mine {
+  align-self: flex-end;
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  border-bottom-right-radius: 2px;
+}
+
+.bubble-theirs {
+  align-self: flex-start;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-bottom-left-radius: 2px;
+}
+
+.bubble-meta {
+  align-self: flex-end;
+  font-size: 10px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 3px;
 }
 
 .ticks {
+  color: var(--text);
+}
+
+.ticks-read {
+  color: #34b7f1;
+}
+
+.thread-input {
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+  border-top: 1px solid var(--border);
+}
+
+.thread-input input {
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 10px 14px;
+  font: inherit;
+  background: var(--bg);
+  color: var(--text-h);
+}
+
+.thread-input button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* --- profile --- */
+.profile-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.profile-fields {
+  min-width: 0;
+}
+
+.profile-muted {
+  color: var(--text);
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profile-setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.profile-setting-label {
+  font-weight: 600;
+  color: var(--text-h);
+  margin-bottom: 2px;
+}
+
+.toggle {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 26px;
+  border-radius: 13px;
+  border: none;
+  background: var(--border);
   position: relative;
+  cursor: pointer;
+  padding: 0;
+}
+
+.toggle-on {
+  background: var(--accent);
+}
+
+.toggle-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  transition: left 0.15s ease;
+}
+
+.toggle-on .toggle-knob {
+  left: 20px;
+}
+
+.close-sessions-btn,
+.logout-btn {
+  margin: 20px 16px 0;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+
+.close-sessions-btn {
+  color: var(--text-h);
+}
+
+.logout-btn {
+  color: #e74c3c;
+  margin-bottom: 20px;
+}
+
+.profile-hint {
+  margin: 8px 16px 0;
+}
+
+/* --- auth modal --- */
+.auth-modal .modal-content {
+  border-radius: 16px;
+}
+
+.auth-title {
+  font-size: 26px;
+  text-align: center;
+  margin: 4px 0 16px;
+}
+
+.auth-tabs {
+  margin-bottom: 16px;
+}
+
+.auth-submit {
   width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
-  }
+/* --- confirm modals (e.g. StartChatModal) --- */
+.modal-confirm-actions {
+  display: flex;
+  gap: 8px;
+}
 
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
-  }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
-  }
+.modal-confirm-actions .auth-submit {
+  width: auto;
+  flex: 1;
+}
+
+.modal-cancel-btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-h);
+  font: inherit;
+  cursor: pointer;
+}
+
+.modal-danger-btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #e74c3c;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.thread-delete-btn {
+  margin-left: auto;
+  flex: 0 0 auto;
+  border: none;
+  background: none;
+  color: var(--text);
+  padding: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }

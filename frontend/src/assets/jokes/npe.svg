@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="338" viewBox="0 0 600 338">
+  <rect width="600" height="338" rx="16" fill="#1e1e2e"/>
+  <rect width="600" height="40" rx="16" fill="#2a2a3c"/>
+  <rect y="24" width="600" height="16" fill="#2a2a3c"/>
+  <circle cx="24" cy="20" r="6" fill="#ff5f56"/>
+  <circle cx="46" cy="20" r="6" fill="#ffbd2e"/>
+  <circle cx="68" cy="20" r="6" fill="#27c93f"/>
+  <text x="300" y="25" text-anchor="middle" font-family="ui-monospace, Consolas, monospace" font-size="13" fill="#8a8fa8">Main.java</text>
+
+  <text x="28" y="84" font-family="ui-monospace, Consolas, monospace" font-size="18" fill="#eeffff"><tspan fill="#c792ea">Object</tspan> amore = <tspan fill="#c792ea">null</tspan>;</text>
+  <text x="28" y="114" font-family="ui-monospace, Consolas, monospace" font-size="18" fill="#eeffff">amore.<tspan fill="#82aaff">dammiAffetto</tspan>();</text>
+
+  <text x="28" y="160" font-family="ui-monospace, Consolas, monospace" font-size="15" fill="#ff5f56">Exception in thread "main"</text>
+  <text x="28" y="184" font-family="ui-monospace, Consolas, monospace" font-size="15" fill="#ff5f56">java.lang.NullPointerException</text>
+
+  <rect x="0" y="270" width="600" height="68" fill="#aa3bff"/>
+  <text x="300" y="311" text-anchor="middle" font-family="system-ui, sans-serif" font-size="21" font-weight="700" fill="#ffffff">Il vero standard dell'amore in Java ☕💔</text>
+</svg>

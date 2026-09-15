@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="338" viewBox="0 0 600 338">
+  <rect width="600" height="338" rx="16" fill="#1e1e2e"/>
+  <rect width="600" height="40" rx="16" fill="#2a2a3c"/>
+  <rect y="24" width="600" height="16" fill="#2a2a3c"/>
+  <circle cx="24" cy="20" r="6" fill="#ff5f56"/>
+  <circle cx="46" cy="20" r="6" fill="#ffbd2e"/>
+  <circle cx="68" cy="20" r="6" fill="#27c93f"/>
+  <text x="300" y="25" text-anchor="middle" font-family="ui-monospace, Consolas, monospace" font-size="13" fill="#8a8fa8">Main.java</text>
+
+  <text x="28" y="90" font-family="ui-monospace, Consolas, monospace" font-size="18" fill="#82aaff">System</text>
+  <text x="106" y="90" font-family="ui-monospace, Consolas, monospace" font-size="18" fill="#eeffff">.gc(); <tspan fill="#676e95">// per favore</tspan></text>
+
+  <text x="28" y="140" font-family="ui-monospace, Consolas, monospace" font-size="18" fill="#676e95">// nessuna garanzia che avvenga davvero</text>
+
+  <rect x="0" y="270" width="600" height="68" fill="#aa3bff"/>
+  <text x="300" y="304" text-anchor="middle" font-family="system-ui, sans-serif" font-size="19" font-weight="700" fill="#ffffff">Il Garbage Collector quando glielo chiedi gentilmente</text>
+  <text x="300" y="326" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" fill="#ffffff">🙏🗑️</text>
+</svg>
